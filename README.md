@@ -9,7 +9,7 @@
 
 [Day3](https://github.com/n8-dev/aoc2020/tree/main/day3) Part 1 ☑️ Part 1 ☑️
 
-[Day4](https://github.com/n8-dev/aoc2020/tree/main/day3) Part 1 
+[Day4](https://github.com/n8-dev/aoc2020/tree/main/day4) Part 1 
 
 
 
