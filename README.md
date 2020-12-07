@@ -3,11 +3,13 @@
 [https://adventofcode.com/2020](https://adventofcode.com/2020)
 
 
-[Day1](day1/README.md#day1)
+[Day1](https://github.com/n8-dev/aoc2020/tree/main/day3)
 
-[Day2](day2/README.md#day2)
+[Day2](https://github.com/n8-dev/aoc2020/tree/main/day3)
 
-[Day3](day3/README.md#day3)
+[Day3](https://github.com/n8-dev/aoc2020/tree/main/day3) Part 1 ☑️ Part 1 ☑️
+
+[Day4](https://github.com/n8-dev/aoc2020/tree/main/day3) Part 1 
 
 
 
