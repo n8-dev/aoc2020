@@ -1,13 +1,8 @@
 <?
-
-
-
 $fileContent = file(__DIR__ . "/data.txt");
 
 $array = [];
 $string = '';
-
-
 
 foreach ($fileContent as $line) {
 	if (strpos($line, ':') > 0) {
@@ -19,9 +14,6 @@ foreach ($fileContent as $line) {
 		$string = '';
 	}
 }
-
-
-// print_r($newArray);
 
 
 $requiredFields = [
@@ -41,9 +33,10 @@ $numberOfValidPassports = 0;
 
 foreach ($array as $possiblePassport) {
 	$valid = true;
+	$stillValid = false;
 
-	echo $possiblePassport . '
-';
+// 	echo $possiblePassport . '
+// ';
 
 	foreach ($requiredFields as $requiredField) {
 
@@ -67,34 +60,26 @@ foreach ($array as $possiblePassport) {
 		$stillValid = validatePassport($possiblePassport);
 
 		if ($stillValid) {
+			// echo 'valid
+// ';
 			$numberOfValidPassports++;
+		}else {
+			// echo 'not valid
+// ';
 		}
 	}
 
-	$i++;
-	if ($i == 1) {
-		break;
-	}
+	// $i++;
+	// if ($i == 8) {
+	// 	break;
+	// }
 
 }
-
-
-
-// echo '
-
-// ';
-// print_r(count($array));
-// echo '
-
-// ';
-// print_r($numberOfValidPassports);
-
-
+echo $numberOfValidPassports;
 
 function validatePassport($possiblePassport) {
 	$valid = true;
 	$tmpArray = array_filter(explode(' ', $possiblePassport));
-	// print_r($tmpArray);
 
 	foreach ($tmpArray as $value) {
 		
@@ -105,7 +90,7 @@ function validatePassport($possiblePassport) {
 
 		switch ($tmpArrayTwo[0]) {
 			case 'byr':
-				if ((strlen($value) != 4) || ($value < 1920) || ($value > 2020)) {
+				if ((strlen($value) != 4) || ($value < 1920) || ($value > 2002)) {
 					$valid = false;
 				}
 				break;
@@ -124,40 +109,61 @@ function validatePassport($possiblePassport) {
 
 			case 'hgt':
 
-				echo $heightValue = substr($value, 0 , -2) . '
-';
-				echo $unitValue = substr($value, -2) . '
-';
+				$heightValue = substr($value, 0 , -2);
+				$unitValue = substr($value, -2);
+
 				if ($unitValue == 'cm') {
 					if ($heightValue < 150 || $heightValue > 193) {
-						$value = false;
+						$valid = false;
 					}
 				}
 				elseif ($unitValue == 'in') {
 					if ($heightValue < 59 || $heightValue > 76) {
-						$value = false;
+						$valid = false;
 					}
+				}else {
+					// not correct unit
+					$valid = false;
 				}
 
 				# code...
 				break;
 
 			case 'hcl':
-				# code...
+				if (preg_match('/#[0-9A-Fa-f]{6}/', $value) == FALSE) {
+					$valid = false;
+				}else {
+					// echo $heightValue = $value . '
+// ';
+				}
 				break;
 
 			case 'ecl':
-				# code...
+				// exactly one of amb blu brn gry grn hzl oth.
+				if (
+					$value == 'amb' ||
+					$value == 'blu' ||
+					$value == 'brn' ||
+					$value == 'gry' ||
+					$value == 'grn' ||
+					$value == 'hzl' ||
+					$value == 'oth'
+				) {
+					// $valid = true;
+				}else {
+					$valid = false;
+				}
+				
 				break;
 
 			case 'pid':
-				# code...
+				if (preg_match('/[0-9]{9}/', $value)) {
+					// it matches
+				}else {
+					$valid = false;
+				}
 				break;
 		}
-
-
-		echo '
-';
 	}
 
 	return $valid;
